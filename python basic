@@ -1,5 +1,6 @@
 ### Terminal:
-1. to know current location : Pwd
-2. what file are loccated in current position : ls
-3.for go to back_up : cd ..
+
+     1. to know current location : Pwd
+     2. what file are loccated in current position : ls
+     3.for go to back_up : cd ..
 
