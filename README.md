@@ -71,6 +71,16 @@
 
     wizard1=Wizard('merlin',60,"abc@gmail.com ")
     print(dir(wizard1))//give us list of all method or attributes 
+    
+  ### power of dunder method
+    class Superlist(list):
+    def __len__(self):
+        return 100;
+
+    Superlist1=Superlist()
+    print(len(Superlist1))
+    Superlist1.append(50)
+    print(Superlist1[0])
 
 
 
