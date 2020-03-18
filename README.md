@@ -55,6 +55,24 @@
 
     wizard1=Wizard('merlin',60,"abc@gmail.com ")
     print(wizard1.email)//we can now access the email
+    
+    
+  ### Introspection:
+      class User():
+      def __init__(self,email):
+          self.email=email
+
+    class Wizard(User):
+        def __init__(self,name,power,email):
+            super().__init__(email)
+            self.name=name
+            self.power=power
+
+
+    wizard1=Wizard('merlin',60,"abc@gmail.com ")
+    print(dir(wizard1))//give us list of all method or attributes 
+
+
 
 
 
