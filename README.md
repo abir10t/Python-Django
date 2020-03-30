@@ -1,11 +1,41 @@
-#.................................................django.............................................................
+# .................................................django.............................................................
 ## terminal :
   
      1. to know current location : Pwd
      2. what file are loccated in current position : ls
      3.for go to back_up : cd ..
+     
   ### for setup python 3.7 in ubuntu
      <a href="https://phoenixnap.com/kb/how-to-install-python-3-ubuntu"></a>
+     
+     
+ ### install django
+     mkdir django
+     cd django
+     conda activate myDjangoEnv
+     django-admin startproject first_project
+     cd first_project
+     python manage.py startapp calc(for making a application)
+     
+    
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
      
      
      
