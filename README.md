@@ -25,11 +25,12 @@
      
 ### django-media-images :
      #### settings.py :
-      MEDIA_URL='/media/'
-      MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
+      MEDIA_URL='/media/' #in the web beowser the image url sitename/media/.... if we change media than url change
+      MEDIA_ROOT=os.path.join(BASE_DIR, 'media') # this say add media to the base directory.
 
      #### Urls.py
        from django.conf.urls.static import static
+       from django.conf import settings
        urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
        
