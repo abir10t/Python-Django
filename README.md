@@ -6,7 +6,7 @@
      3.for go to back_up : cd ..
      
   ### for setup python 3.7 in ubuntu
-     <a href="https://phoenixnap.com/kb/how-to-install-python-3-ubuntu"> </a>
+     https://phoenixnap.com/kb/how-to-install-python-3-ubuntu
      
      
  ### install django && terminal work
