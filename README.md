@@ -16,6 +16,8 @@
      django-admin startproject first_project
      cd first_project
      python manage.py startapp calc(for making a application)
+     migration: python manage.py migrate
+     for know to the system :python manage.py makemigrations
      
     
      
