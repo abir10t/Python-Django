@@ -6,7 +6,7 @@
      3.for go to back_up : cd ..
      
   ### for setup python 3.7 in ubuntu
-     <a href="https://phoenixnap.com/kb/how-to-install-python-3-ubuntu"></a>
+     <a href="https://phoenixnap.com/kb/how-to-install-python-3-ubuntu"> </a>
      
      
  ### install django && terminal work
@@ -25,12 +25,11 @@
      
 ### django-media-images :
      #### settings.py :
-      MEDIA_URL='/media/' #in the web beowser the image url sitename/media/.... if we change media than url change
-      MEDIA_ROOT=os.path.join(BASE_DIR, 'media') # this say add media to the base directory.
+      MEDIA_URL='/media/'
+      MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
 
      #### Urls.py
        from django.conf.urls.static import static
-       from django.conf import settings
        urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
        
