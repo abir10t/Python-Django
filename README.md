@@ -20,7 +20,7 @@
      #### for know to the system : python manage.py makemigrations
      #### admin user & pass : python manage.py createsuperuser
      #### for changing password : python manage.py changepassword username
-  # ........................................................................................................................
+  
      
      
 ### django-media-images :
@@ -46,7 +46,7 @@
      
      
      
-     
+ # .........................................python................................................
      
      
 ### Lambda Expressions Map and Filter
