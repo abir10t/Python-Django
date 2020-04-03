@@ -20,13 +20,19 @@
      #### for know to the system : python manage.py makemigrations
      #### admin user & pass : python manage.py createsuperuser
      #### for changing password : python manage.py changepassword username
-     
-    
-     
+  # ........................................................................................................................
      
      
-     
-     
+### django-media-images :
+     #### settings.py :
+      MEDIA_URL='/media/'
+      MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
+
+     #### Urls.py
+       from django.conf import settings
+       urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+       
      
      
      
