@@ -9,15 +9,17 @@
      <a href="https://phoenixnap.com/kb/how-to-install-python-3-ubuntu"></a>
      
      
- ### install django
+ ### install django && terminal work
      mkdir django
      cd django
      conda activate myDjangoEnv
      django-admin startproject first_project
      cd first_project
      python manage.py startapp calc(for making a application)
-     migration: python manage.py migrate
-     for know to the system :python manage.py makemigrations
+     #### migration: python manage.py migrate
+     #### for know to the system : python manage.py makemigrations
+     #### admin user & pass : python manage.py createsuperuser
+     #### for changing password : python manage.py changepassword username
      
     
      
