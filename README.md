@@ -31,7 +31,14 @@
      #### Urls.py
        from django.conf.urls.static import static
        urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+       
+       
+### grabs from database:
+  
+    ##### views.py:
+    from.models import Project
+    projects=Project.objects.all()
+    return render(request,'pro/home.html',{'projects':projects})
        
      
      
