@@ -42,8 +42,22 @@
        
      
      
-     
-     
+  # another set of urls
+  
+    ##### urls.py :
+    from django.urls import path,include
+        path('blog/', include('blog.urls')),
+        
+    create urls.py folder into apps  
+    
+    #####  apps urls.py:
+        from django.urls import path
+        from . import views
+        urlpatterns = [
+                path('',views.all_blogs, name='all_blogs'),
+              ]
+
+   
      
      
      
