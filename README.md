@@ -10,6 +10,18 @@
      
      
  ### install django && terminal work
+ 
+    ##### create environment->
+      
+         1. conda create --name twitter django(django provides that in twitter we need django packages)
+         2. conda info --envs (list of environment)
+         3. source activate twitter (for activate)
+         4. conda install django=2.2 (for latest version use just django)
+         5. deactivate(for deactivate the environment)
+         6. python -m django --version(for cheacking the django version)
+      
+      
+      
      mkdir django
      cd django
      conda activate myDjangoEnv
