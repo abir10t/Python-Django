@@ -54,7 +54,7 @@
        
      
      
-  # another set of urls
+  ### another set of urls
   
     ##### urls.py :
     from django.urls import path,include
@@ -70,6 +70,38 @@
               ]
 
    
+ ### create signup form (3.0):
+              
+      ##### views.py: 
+    from django.contrib.auth.forms import UserCreationForm
+      def signupuser(request):
+        return render(request, 'todo/signupuser.html' , {'form':UserCreationForm()})
+        
+    ##### templates:
+             {{ form }} #({{ form.as_p }} turns into paragraph)
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
      
      
      
