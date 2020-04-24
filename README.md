@@ -89,6 +89,7 @@
                     user.save()
                     login(request, user)
                     return redirect('currenttodos')
+                    
                  except 	IntegrityError:
                     return render(request, 'todo/signupuser.html' , {'form':UserCreationForm(), 'error':'username already taken'})
            else:
