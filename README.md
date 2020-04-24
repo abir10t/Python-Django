@@ -70,15 +70,49 @@
               ]
 
    
- ### create signup form (3.0):
-              
-      ##### views.py: 
-    from django.contrib.auth.forms import UserCreationForm
-      def signupuser(request):
-        return render(request, 'todo/signupuser.html' , {'form':UserCreationForm()})
-        
-    ##### templates:
-             {{ form }} #({{ form.as_p }} turns into paragraph)
+ ### create signup form && show logged in page (3.0):
+    ##### views.py:
+        from django.shortcuts import render, redirect
+        from django.contrib.auth.forms import UserCreationForm
+        from django.contrib.auth.models import User
+        from django.db import IntegrityError
+        from django.contrib.auth import login
+
+    def signupuser(request):
+        if request.method =='GET':
+           return render(request, 'todo/signupuser.html' , {'form':UserCreationForm()})
+
+        else:
+          if request.POST['password1'] == request.POST['password2']:
+                try:
+                    user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
+                    user.save()
+                    login(request, user)
+                    return redirect('currenttodos')
+                 except 	IntegrityError:
+                    return render(request, 'todo/signupuser.html' , {'form':UserCreationForm(), 'error':'username already taken'})
+           else:
+                return render(request, 'todo/signupuser.html' , {'form':UserCreationForm(), 'error':'password did not match'})
+
+    def currenttodos(request):
+         return render(request, 'todo/currenttodos.html')
+    
+    
+    ##### signupuser.html :
+          <h1>signup</h1>
+          <h2>{{ error }}</h2>
+          <form method="POST">
+              {% csrf_token %}
+              {{form.as_p}}
+              <button type="submit">signup</button>
+           </form>
+    ##### currenttodos.htnl:
+                you are logged in
+    
+
+   
+   
+    
      
      
      
