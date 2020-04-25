@@ -153,7 +153,7 @@
                            user=User.objects.create_user(request.POST['username'] , password=request.POST['password1'])                                user.save() 
                            
                         except IntegrityError:
-                           return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm() , 'error':'this                                  username alredy registered'})
+                           return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm() ,'error':'thisusername alredy registered'})
                            
                      else:
                         return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm() , 'error':'password did not match'})
