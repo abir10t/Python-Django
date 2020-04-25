@@ -91,12 +91,12 @@
     
     
     ##### signupuser.html :
-               {{ form.as_p }}
+               {{ form.as_p }}  #as_p makes text as <p>
                
                
                
                
- ### make signup button & user can create account & save them into database
+ ### make signup button & user can create account & save them into database & 
      ##### create super user for admin by terminal
               python manage.py createsuperuser-> give username,pass 
             
@@ -104,9 +104,10 @@
      ##### signupuser.html :
      
               <h1>Sign Up</h1>
-              <form method="POST"> #POST are using creating new data
-                {% csrf_token %}
-                {{ form.as_p }}
+              <h2>{{ error }}</h2>
+              <form method="POST"> #  <!post are using creating new data ->
+                {% csrf_token %}   # showing text <p>
+                {{ form.as_p }}    #for using submit type button
                 <button type="submit">sign Up</button>
               </form>
               
@@ -122,6 +123,7 @@
                  
              else:                      # for 'POST' ->when some one using 
                                         #signup button for create account  
+                                        
                      if request.POST['password1'] == request.POST['password2']: #cheacking password & 
                                                                                 #password confirm field same or not
                                                                                 
@@ -129,12 +131,35 @@
                                                                                             #just pass the username,password
                         user.save()   #save new account into database
                      else:
-                        pass
+                     
+                        return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm() , 'error':'password did                         not match'})
 
            
             
-   
-
+    ##### cheack user name unique when create account (IntegrityError) :
+    
+           from django.shortcuts import render
+           from django.contrib.auth.forms import UserCreationForm
+           from django.contrib.auth.models import User  
+           from django.db import IntegrityError
+    
+         def signupuser(request):
+            if request.method == 'GET':  
+                 return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm()})
+                 
+             else:                                              
+                     if request.POST['password1'] == request.POST['password2']:
+                        try:    #if user name not registered than try
+                           user=User.objects.create_user(request.POST['username'] , password=request.POST['password1'])                                user.save() 
+                           
+                        except IntegrityError:
+                           return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm() , 'error':'this                                  username alredy registered'})
+                           
+                     else:
+                        return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm() , 'error':'password did                         not match'})
+                  
+           
+           
    
    
     
