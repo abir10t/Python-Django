@@ -69,46 +69,71 @@
               ]
 
    
- ### create signup form && show logged in page (3.0):
-    ##### views.py:
-        from django.shortcuts import render, redirect
-        from django.contrib.auth.forms import UserCreationForm
-        from django.contrib.auth.models import User
-        from django.db import IntegrityError
-        from django.contrib.auth import login
+ ### create signup form (3.0):
+ 
+ 
+    ##### urls.py :
+          from django.conf.urls import url
+          from django.contrib import admin
+          from calc import views
+          urlpatterns = [
+              url(r'^admin/', admin.site.urls),
+              url(r'^signup/', views.signupuser , name='signupuser'),
+          ]
+        
+        
+    ##### views.py :
+           from django.shortcuts import render
+           from django.contrib.auth.forms import UserCreationForm
 
-    def signupuser(request):
-        if request.method =='GET':
-           return render(request, 'todo/signupuser.html' , {'form':UserCreationForm()})
-
-        else:
-          if request.POST['password1'] == request.POST['password2']:
-                try:
-                    user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
-                    user.save()
-                    login(request, user)
-                    return redirect('currenttodos')
-                    
-                 except 	IntegrityError:
-                    return render(request, 'todo/signupuser.html' , {'form':UserCreationForm(), 'error':'username already taken'})
-           else:
-                return render(request, 'todo/signupuser.html' , {'form':UserCreationForm(), 'error':'password did not match'})
-
-    def currenttodos(request):
-         return render(request, 'todo/currenttodos.html')
+           def signupuser(request):
+              return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm()})
     
     
     ##### signupuser.html :
-          <h1>signup</h1>
-          <h2>{{ error }}</h2>
-          <form method="POST">
-              {% csrf_token %}
-              {{form.as_p}}
-              <button type="submit">signup</button>
-           </form>
-    ##### currenttodos.htnl:
-                you are logged in
-    
+               {{ form.as_p }}
+               
+               
+               
+               
+ ### make signup button & user can create account & save them into database
+     ##### create super user for admin by terminal
+              python manage.py createsuperuser-> give username,pass 
+            
+            
+     ##### signupuser.html :
+     
+              <h1>Sign Up</h1>
+              <form method="POST"> #POST are using creating new data
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">sign Up</button>
+              </form>
+              
+        
+    ##### views.py:   
+        from django.shortcuts import render
+        from django.contrib.auth.forms import UserCreationForm
+        from django.contrib.auth.models import User  # User.objects.create_user() -> for using it
+        
+        def signupuser(request):
+            if request.method == 'GET':  # for showing just signup/ page.
+                 return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm()})
+                 
+             else:                      # for 'POST' ->when some one using 
+                                        #signup button for create account  
+                     if request.POST['password1'] == request.POST['password2']: #cheacking password & 
+                                                                                #password confirm field same or not
+                                                                                
+                        user=User.objects.create_user(request.POST['username'] , password=request.POST['password1'])#for                                                                                                 #making new user object,
+                                                                                            #just pass the username,password
+                        user.save()   #save new account into database
+                     else:
+                        pass
+
+           
+            
+   
 
    
    
