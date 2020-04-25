@@ -124,11 +124,11 @@
              else:                      # for 'POST' ->when some one using 
                                         #signup button for create account  
                                         
-                     if request.POST['password1'] == request.POST['password2']: #cheacking password & 
-                                                                                #password confirm field same or not
+                     if request.POST['password1'] == request.POST['password2']: #cheacking password & password confirm field same or not.
                                                                                 
-                        user=User.objects.create_user(request.POST['username'] , password=request.POST['password1'])#for                                                                                                 #making new user object,
-                                                                                            #just pass the username,password
+                                                                                
+                        user=User.objects.create_user(request.POST['username'] , password=request.POST['password1'])#for  making new user object,pass the username & password                                                                                               
+                                                                                            
                         user.save()   #save new account into database
                      else:
                      
