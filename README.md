@@ -132,7 +132,7 @@
                         user.save()   #save new account into database
                      else:
                      
-                        return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm() , 'error':'password did                         not match'})
+                        return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm() , 'error':'password did  not match'})
 
            
             
@@ -156,7 +156,7 @@
                            return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm() , 'error':'this                                  username alredy registered'})
                            
                      else:
-                        return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm() , 'error':'password did                         not match'})
+                        return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm() , 'error':'password did not match'})
                   
            
            
