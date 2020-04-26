@@ -161,7 +161,7 @@
                         
                         
                         
-   ### logged into account : 
+   ### showing logged into account : 
           ### urls.py :
               urlpatterns = [
                                 url(r'^current/', views.currenttodos , name='currenttodos'),
@@ -221,11 +221,70 @@
 
     
 
-### making home page:
+### logout:
+     
+     ##### urls.py:
+           urlpatterns = [
+      path('logout/', views.logoutuser, name='logoutuser'),
+    
+    ]
+    
+    
+    #####views.py:
+      from django.contrib.auth import login, logout    #for account logout 
+      
+       def logoutuser(request):
+           if request.method == 'POST':  # it can kicking user out , because browser are doing this work automaticly, so we logged out if it is post request. in base.html -> <a href="{% url 'logoutuser' %}">LOGOUT</a> -> 'GET' statement
+              logout(request)   #() -> pass what things are logged out
+              return redirect('home')  # redirect use for go to the another function in views.py, and it's must .
+              
+           
+    ### base.html :
+           <a href="{% url 'logoutuser' %}">LOGOUT</a>
+
+
+
+      
+      
+      
+     
+
+
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     ##### urls.py:
+           urlpatterns = [
+    path('', views.home, name='home'),
+    
+    ]
+
+
      ##### views.py:
         def home(request):
-           return render(request, 'todo/home.html')
-           
+           return render(request, 'todo/home.html')    
            
            
     ##### home.html:
