@@ -241,58 +241,57 @@
            
     ### base.html :
            <a href="{% url 'logoutuser' %}">LOGOUT</a>
-
-
-
-      
-      
-      
-     
-
-
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     ##### urls.py:
-           urlpatterns = [
-    path('', views.home, name='home'),
+           
     
-    ]
-
-
-     ##### views.py:
-        def home(request):
-           return render(request, 'todo/home.html')    
+     ### make a home page
+     
+     ### solve error:  'todo.views.logoutuser didn't return an HttpResponse object'
+            error occur because this function has a 'POST' but no action is happend
+            
+         ##### base.html:
+              <form action="{% url 'logoutuser' %}" method="POST"> 
+                   {% csrf_token %}
+                   <button type="submit">Logout</button>
+              </form>
+              
+      
+    
            
            
-    ##### home.html:
-      {% extends 'todo/base.html' %}
-      {% block content %}
-         Home
-      {% endblock %}
 
+
+
+      
+      
+      
+     
+
+
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+    
            
       
 
