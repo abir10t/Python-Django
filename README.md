@@ -240,7 +240,7 @@
               
            
     ### base.html :
-           <a href="{% url 'logoutuser' %}">LOGOUT</a>
+           <a href="{% url 'logoutuser' %}">LOGOUT</a> # now it's GET
            
     
      ### make a home page
