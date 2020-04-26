@@ -96,7 +96,7 @@
                
                
                
- ### make signup button & user can create account & save them into database & 
+ ### make signup button & user can create account & save them into database  
      ##### create super user for admin by terminal
               python manage.py createsuperuser-> give username,pass 
             
@@ -136,8 +136,9 @@
 
            
             
-    ##### cheack user name unique when create account (IntegrityError) :
-    
+   ### cheack user name unique when create account (IntegrityError) :
+     ##### views.py:
+        
            from django.shortcuts import render
            from django.contrib.auth.forms import UserCreationForm
            from django.contrib.auth.models import User  
@@ -157,6 +158,72 @@
                            
                      else:
                         return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm() , 'error':'password did not match'})
+                        
+                        
+                        
+   ### logged into account : 
+          ### urls.py :
+              urlpatterns = [
+                                url(r'^current/', views.currenttodos , name='currenttodos'),
+                            ]
+                            
+   
+         ##### views.py:
+                from django.shortcuts import render, redirect
+                from django.contrib.auth import login
+                
+                try:
+                   user=User.objects.create_user(request.POST['username'] , password=request.POST['password1'])
+                   user.save()
+                   login(request , user) #after login we have to send them somewhere,making currenttodos page.
+                   return redirect('currenttodos') #redirect into currenttodos
+                   
+                def currenttodos(request):
+                   return render(request, 'todo/currenttodos.html' )
+                
+                
+                
+                
+### show if a user is logged in:
+    ##### currenttodos.html:
+           {% extends 'todo/base.html' %}
+           {% block content %}
+              Current
+           {% endblock %}
+           
+     
+    #####  base.html :
+                {% if user.is_authenticated %} <! cheacked if someone is logged in ->
+                Logged in as {{ user.username }}
+                <a href="logout">logout</a>
+                
+                {% else %}
+                <a href="logout">Signup</a>
+                <a href="logout">login</a>
+
+                {% endif %}
+                {% block content %}{% endblock %}
+                
+                
+     ### make this change also in our signup page:
+     
+           ### signupuser.html:
+              {% extends 'calc/base.html' %}
+              {% block content %}
+              <h1>Sign Up</h1>
+              <h2>{{ error }}</h2>
+              <form method="POST">  <!post are using creating new data ->
+                {% csrf_token %}
+                {{ form.as_p }}
+              <button type="submit">sign Up</button>
+              </form>
+              {% endblock %}
+
+    
+
+
+
+             
                   
            
            
