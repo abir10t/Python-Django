@@ -87,7 +87,7 @@
            from django.contrib.auth.forms import UserCreationForm
 
            def signupuser(request):
-              return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm()})
+              return render(request, 'todo/signupuser.html' ,  {'form':UserCreationForm()})
     
     
     ##### signupuser.html :
@@ -119,7 +119,7 @@
         
         def signupuser(request):
             if request.method == 'GET':  # for showing just signup/ page.
-                 return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm()})
+                 return render(request, 'todo/signupuser.html' ,  {'form':UserCreationForm()})
                  
              else:                      # for 'POST' ->when some one using 
                                         #signup button for create account  
@@ -146,7 +146,7 @@
     
          def signupuser(request):
             if request.method == 'GET':  
-                 return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm()})
+                 return render(request, 'todo/signupuser.html' ,  {'form':UserCreationForm()})
                  
              else:                                              
                      if request.POST['password1'] == request.POST['password2']:
@@ -154,10 +154,10 @@
                            user=User.objects.create_user(request.POST['username'] , password=request.POST['password1'])                                user.save() 
                            
                         except IntegrityError:
-                           return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm() ,'error':'thisusername alredy registered'})
+                           return render(request, 'todo/signupuser.html' ,  {'form':UserCreationForm() ,'error':'thisusername alredy registered'})
                            
                      else:
-                        return render(request, 'calc/signupuser.html' ,  {'form':UserCreationForm() , 'error':'password did not match'})
+                        return render(request, 'todo/signupuser.html' ,  {'form':UserCreationForm() , 'error':'password did not match'})
                         
                         
                         
@@ -221,10 +221,24 @@
 
     
 
+### making home page:
+     ##### views.py:
+        def home(request):
+           return render(request, 'todo/home.html')
+           
+           
+           
+    ##### home.html:
+      {% extends 'todo/base.html' %}
+      {% block content %}
+         Home
+      {% endblock %}
+
+           
+      
 
 
-             
-                  
+                       
            
            
    
