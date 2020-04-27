@@ -375,7 +375,26 @@
            {% endblock %}
 
      
-     
+    ### title size is 100 char, so 101 char found error (ValueError).Handel this by try and exception
+     ##### views.py:
+    def createtodo(request):
+       if request.method =='GET':
+           return render(request, 'todo/createtodo.html' , {'form':TodoForm()})
+       else:
+        try:
+           #we have to get the information from the 'POST' request and connect with our form
+           form=TodoForm(request.POST) #whatever they send us like title,memo we are gona pass that into Todoform. and we are collecting this  data in form
+           newtodo=form.save(commit=False) # cammit=false stop saving data into database
+           #we have to handel which user are saving this data
+           newtodo.user=request.user
+           newtodo.save()
+           return redirect('currenttodos')
+           
+        except ValueError:
+            return render(request, 'todo/createtodo.html' , {'form':TodoForm(),'error':'Bad data passed in. T'})
+
+          
+         
      
      
      
