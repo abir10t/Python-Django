@@ -361,6 +361,7 @@
           class Meta: #specify what class it is,what model,fields we want ,so we need to use meta class
             model =Todo #specifying the model ,and we need to import from .models import Todo
             fields=['title','memo','important'] #specify what we want
+            
          
      ##### createtodo.html:
            {% extends 'todo/base.html' %}
@@ -376,7 +377,9 @@
 
      
     ### title size is 100 char, so 101 char found error (ValueError).Handel this by try and exception
+    
      ##### views.py:
+     
     def createtodo(request):
        if request.method =='GET':
            return render(request, 'todo/createtodo.html' , {'form':TodoForm()})
@@ -396,7 +399,31 @@
           
          
      
-     
+  ### show user todo list:
+  
+     ### views.py:
+     from .models import Todo # for showing user todo list
+     def currenttodos(request):
+       todos=Todo.objects.filter(user=request.user)
+       return render(request, 'todo/currenttodos.html',{'todos':todos})
+       
+       
+       
+       
+     ### currenttodos.html:
+        {% extends 'todo/base.html' %}
+          {% block content %}
+          Current lists...
+          
+          <ul>
+            {% for todo in todos %}
+            <li>{{ todo.title }} </li>
+            {% endfor %}
+          </ul>
+    
+        {% endblock %}
+
+      
      
      
      
