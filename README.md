@@ -294,16 +294,86 @@
           <button type="submit">Login</button>
         </form>
        {% endblock %}
+       
+       
+ 
+ 
+### creating models for todo: 
+    ##### models.py:
+      from django.db import models
+      from django.contrib.auth.models import User #for one to many relationship
+      class Todo(models.Model): #search django model field
+        title = models.CharField(max_length=100)
+        memo = models.TextField(blank=True)
+        created = models.DateTimeField(auto_now_add=True)
+        datecompleted = models.DateTimeField(null=True)
+        important =  models.BooleanField(default=False)
+        user = models.ForeignKey(User, on_delete=models.CASCADE)#ForeignKey store the relationship between this todo and that.
+    #python3 manage.py makemigrations
+    #python3 manage.py migrate
+       
+    #####admin.py:
+      from django.contrib import admin
+      from .models import Todo
+      admin.site.register(Todo)
+
+    ### created field not showing , let's make it clear:
+        ##### admin.py:
+             from django.contrib import admin
+             from .models import Todo
+             
+            #specifying 'created' as read only file
+            class TodoAdmin(admin.ModelAdmin):
+               readonly_fields=('created',)
+               
+            admin.site.register(Todo,TodoAdmin)
 
       
      
 
+  ### user can now crteate todo object:
+       ##### urls.py:
+       
+           path('create/', views.createtodo, name='createtodo'), 
+     
+     
+      ##### views.py:
+      
+     def createtodo(request):
+         if request.method =='GET':
+             return render(request, 'todo/createtodo.html' , {'form':TodoForm()})
+         else:
+             #we have to get the information from the 'POST' request and connect with our form
+             form=TodoForm(request.POST) #whatever they send us like title,memo we are gona pass that into Todoform. and we are collecting this  data in form
+             newtodo=form.save(commit=False) # cammit=false stop saving data into database
+             #we have to handel which user are saving this data
+             newtodo.user=request.user
+             newtodo.save()
+             return redirect('currenttodos')
 
-     
-     
-     
-     
-     
+           
+      ##### forms.py:
+      
+         from django.forms import ModelForm #TodoForm needs inheret, so we import it
+         from .models import Todo
+         
+         class TodoForm(ModelForm):
+          class Meta: #specify what class it is,what model,fields we want ,so we need to use meta class
+            model =Todo #specifying the model ,and we need to import from .models import Todo
+            fields=['title','memo','important'] #specify what we want
+         
+     ##### createtodo.html:
+           {% extends 'todo/base.html' %}
+           {% block content %}
+            <h1>create</h1>
+            <h2>{{ error }}</h2>
+            <form method="POST">
+              {% csrf_token %}
+              {{form.as_p}}
+              <button type="submit">Create</button>
+            </form>
+           {% endblock %}
+
      
      
      
