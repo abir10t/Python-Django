@@ -427,7 +427,23 @@
      
      
      
-     
+ ### if a todo is important show it bold & show the memo
+     ##### currentstodo.html:
+     {% extends 'todo/base.html' %}
+     {% block content %}
+      Current lists...
+
+      <ul>
+        {% for todo in todos %}
+        <li>
+          {% if todo.important %}<b>{% endif %}{{ todo.title }} {% if todo.important %}</b>{% endif %}
+          {% if todo.memo %}-{{ todo.memo }}{% endif %}
+        </li>  <!-- if a todo is important, show bold ,if memo is their show that -->
+        {% endfor %}
+      </ul>
+     {% endblock %}
+
+           
      
      
      
@@ -558,8 +574,6 @@
     print(len(Superlist1))
     Superlist1.append(50)
     print(Superlist1[0])
-
-
 
 
 
