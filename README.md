@@ -444,10 +444,12 @@
      {% endblock %}
 
            
-  ### some one able to click this todo.edit todo
+  ### some one able to click this todo, they can edit todo
       ##### showing a particular todo. by entaring url http://127.0.0.1:8000/todo/2
+      
      ##### urls.py:
        path('todo/<int:todo_pk>', views.todo, name='view.todo'),#we are going to specifying that we are looking a int
+       
        
      #####
       views.py:
@@ -455,6 +457,8 @@
         def viewtodo(request,todo_pk):   #todo_pk thats primary key use in urls.py
             todo=get_object_or_404(Todo, pk=todo_pk)#Todo is our model class
             return render(request, 'todo/viewtodo.html' , {'todo':todo})
+            
+            
             
             
      ##### now create todo link(we can click todo and that todo goes with another page):
@@ -473,12 +477,13 @@
             {% endfor %}
           </ul>
           {% endblock %}
-          
+         
+         
 
     ##### now edit todos:
       ##### views.py:
     def viewtodo(request,todo_pk):   #todo_pk thats primary key use in urls.py
-     todo=get_object_or_404(Todo, pk=todo_pk)#Todo is our model class
+     todo=get_object_or_404(Todo, pk=todo_pk, user=request.user)#Todo is our model class
      if request.method =='GET':
       form=TodoForm(instance=todo) #open with whats value are in the form now
       return render(request, 'todo/viewtodo.html' , {'todo':todo,'form':form})
