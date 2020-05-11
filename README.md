@@ -444,9 +444,68 @@
      {% endblock %}
 
            
-     
-     
-     
+  ### some one able to click this todo.edit todo
+      ##### showing a particular todo. by entaring url http://127.0.0.1:8000/todo/2
+     ##### urls.py:
+       path('todo/<int:todo_pk>', views.todo, name='view.todo'),#we are going to specifying that we are looking a int
+       
+     #####
+      views.py:
+        from django.shortcuts import render, redirect,get_object_or_404
+        def viewtodo(request,todo_pk):   #todo_pk thats primary key use in urls.py
+            todo=get_object_or_404(Todo, pk=todo_pk)#Todo is our model class
+            return render(request, 'todo/viewtodo.html' , {'todo':todo})
+            
+            
+     ##### now create todo link(we can click todo and that todo goes with another page):
+        ##### currenttodos.html:
+           {% extends 'todo/base.html' %}
+          {% block content %}
+          Current lists...
+          <ul>
+            {% for todo in todos %}
+            <li>
+              <a href="{% url 'viewtodo' todo.id%}">  <!--by default database id.-->
+              {% if todo.important %}<b>{% endif %}{{ todo.title }} {% if todo.important %}</b>{% endif %}
+              {% if todo.memo %}-{{ todo.memo }}{% endif %}
+              </a>
+            </li>  <!-- if a todo is important, show bold ,if memo is their show that -->
+            {% endfor %}
+          </ul>
+          {% endblock %}
+          
+
+    ##### now edit todos:
+      ##### views.py:
+    def viewtodo(request,todo_pk):   #todo_pk thats primary key use in urls.py
+     todo=get_object_or_404(Todo, pk=todo_pk)#Todo is our model class
+     if request.method =='GET':
+      form=TodoForm(instance=todo) #open with whats value are in the form now
+      return render(request, 'todo/viewtodo.html' , {'todo':todo,'form':form})
+     else:
+         try:
+           form=TodoForm(request.POST,instance=todo) # for saving with new data , instance=todo->that means we are just editing existence things.
+           form.save()
+           return redirect('currenttodos')
+         except ValueError:
+             return render(request, 'todo/viewtodo.html' , {'todo':todo,'form':form,'error':'bad info'})
+
+
+         ##### viewtodo.html
+            {% extends 'todo/base.html' %}
+            {% block content %}
+            {{ error }}
+            <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">save</button>
+            </form>
+            {% endblock %}
+
+          
+           
+
+
      
      
      
