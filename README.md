@@ -509,7 +509,23 @@
 
           
            
-
+### complete todo
+    ##### urls.py 
+          path('todo/<int:todo_pk>/complete', views.completetodo, name='completetodo'),
+          
+    ##### views.py
+        from django.utils import timezone
+        
+        def currenttodos(request):
+           todos=Todo.objects.filter(user=request.user, datecompleted__isnull=True)
+           return render(request, 'todo/currenttodos.html',{'todos':todos})
+           
+        def completetodo(request, todo_pk):
+          todo=get_object_or_404(Todo, pk=todo_pk, user=request.user)
+          if request.method =='POST':
+              todo.datecompleted = timezone.now() #in models.py we take datecompleted=null ,here we give it timezone, so we can understand that it's complete
+              todo.save()
+              return redirect('currenttodos')
 
      
      
