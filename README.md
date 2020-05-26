@@ -528,8 +528,20 @@
               return redirect('currenttodos')
 
      
-     
-     
+ ### deletetodo 
+    ##### urls.py
+      path('todo/<int:todo_pk>/complete', views.deletetodo, name='deletetodo'),
+ 
+ 
+ 
+ 
+    ##### views.py
+     def deletetodo(request, todo_pk):
+       todo=get_object_or_404(Todo, pk=todo_pk, user=request.user)
+     if request.method =='POST':
+        todo.delete()        # it permanently delete from database
+        return redirect('currenttodos')
+
      
      
      
