@@ -572,8 +572,16 @@
 
      
      
-     
-     
+  ### login_required:
+    from django.contrib.auth.decorators import login_required
+    
+  ##### views.py
+    @login_required
+    def loginuser(request):
+      pass
+      
+ ##### settings.py:
+    LOGIN_URL = '/login' #it's take the login page its don't work with loginuser.
     
            
       
