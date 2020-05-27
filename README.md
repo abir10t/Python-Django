@@ -542,7 +542,34 @@
         todo.delete()        # it permanently delete from database
         return redirect('currenttodos')
 
-     
+ ### find which todo are done and when
+    ##### urls.py:
+          path('completed/', views.completedtodos, name='completedtodos'),
+          
+    ##### views.py:
+      def completetodo(request, todo_pk):
+        todo=get_object_or_404(Todo, pk=todo_pk, user=request.user)
+        if request.method =='POST':
+            todo.datecompleted = timezone.now() #in models.py we take datecompleted=null ,here we give it timezone, so we can understand that it's complete
+            todo.save()
+            return redirect('currenttodos')
+            
+            
+    ##### completedtodos.html:
+         {% block content %}
+          completed...
+          <ul>
+            {% for todo in todos %}
+            <li>
+              <a href="{% url 'viewtodo' todo.id%}">  <!--by default database id.-->
+              {% if todo.important %}<b>{% endif %}{{ todo.title }} {% if todo.important %}</b>{% endif %}
+              {% if todo.memo %}-{{ todo.memo }}{% endif %}{{ todo.datecompleted|date:'M j Y H:i' }}<!-- it's a fancy bit -->
+              </a>
+            </li>  <!-- if a todo is important, show bold ,if memo is their show that -->
+            {% endfor %}
+          </ul>
+          {% endblock %}
+
      
      
      
