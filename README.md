@@ -105,7 +105,7 @@
      <img src="{% static "images/im.jpeg" %}" alt="Uh oh, didn't show!">
      </html>
     
-  ##### we can also handel css file from static foldedr
+  ##### we can also handel css file from static folder.
      
        
        
