@@ -83,7 +83,30 @@
       </body>
        
   
-       
+  
+  
+  
+  ### static :
+  
+  ##### settings.py:
+     STATIC_URL = '/static/'
+     STATIC_DIR = os.path.join(BASE_DIR,"static")
+     STATICFILES_DIRS = [
+      STATIC_DIR,
+
+     ]
+     
+  ##### create new file at parrent folder named = static -> images 
+  
+     <!DOCTYPE html>
+     {% load staticfiles %}
+     <html>
+     ....
+     <img src="{% static "images/im.jpeg" %}" alt="Uh oh, didn't show!">
+     </html>
+    
+  ##### we can also handel css file from static foldedr
+     
        
        
    
