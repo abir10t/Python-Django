@@ -68,6 +68,7 @@
        TEMPLATE_DIR = os.path.join(BASE_DIR,"templates"))
        
   
+  
    #### Templates tag :
    
    ##### views.py:
