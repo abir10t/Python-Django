@@ -113,7 +113,7 @@
   
   ### Creating Models:
   
-   ##### Special Methods ( oop python ) :
+   ##### Special Methods ( oop python: __str__  ) :
       class Book():
 
       def__init__(self,title,author,pages):
