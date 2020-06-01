@@ -33,15 +33,15 @@
      #### for changing password : python manage.py changepassword username
   
    
-  ### URL Mapping (create urls.py in project folder):
+  ### URL Mapping (create urls.py in project folder) :
      
-   ##### urls.py:
+   ##### urls.py :
          from django.conf.urls import include
            path('first_app/',include('first.urls')),
            
          now create urls.py in apps folder
        
-   ##### urls.py
+   ##### urls.py :
           from django.conf.urls import url
           from first import views
           
@@ -51,7 +51,7 @@
 
            ]
            
-   ##### views.py
+   ##### views.py :
           def index(request):
              return HttpResponse("hello world")
 
