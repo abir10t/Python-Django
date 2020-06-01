@@ -39,9 +39,11 @@
          from django.conf.urls import include
            path('first_app/',include('first.urls')),
            
-         now create urls.py in apps folder
+        
        
    ##### urls.py :
+          now create urls.py in apps folder
+          
           from django.conf.urls import url
           from first import views
           
