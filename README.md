@@ -66,6 +66,30 @@
    
        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
        TEMPLATE_DIR = os.path.join(BASE_DIR,"templates"))
+       
+       
+       
+   #### Templates tag :
+   
+   ##### views.py:
+     def index(request):
+       my_dict={'insert_me':"hello i am from views.py "}
+       return render(request,'first_app/index.html',context=my_dict)
+
+   ##### templates-> first_app -> index.html :
+      <body>
+      <h1>this is index </h1>
+          {{ insert_me }}
+      </body>
+       
+  
+       
+       
+       
+   
+       
+       
+   
       
       
                    
