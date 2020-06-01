@@ -58,7 +58,7 @@
       
 
    ### Templates 
-      ###### issue of operating system, so we will make a default path for templates.now if we transfer this file to another pc no error will be held(windows to linux or linux to windows).
+   ##### issue of operating system, so we will make a default path for templates.now if we transfer this file to another pc no error will be held(windows to linux or linux to windows).
       
       
                        
