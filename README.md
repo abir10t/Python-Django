@@ -37,9 +37,7 @@
      
    ##### urls.py :
          from django.conf.urls import include
-           path('first_app/',include('first.urls')),
-           
-        
+           path('first_app/',include('first.urls')),   
        
    ##### urls.py :
           now create urls.py in apps folder
@@ -56,14 +54,21 @@
    ##### views.py :
           def index(request):
              return HttpResponse("hello world")
+             
+             
+             
 
-      
-
-   ### Templates 
+   ### Templates :
+   
    ##### issue of operating system, so we will make a default path for templates.now if we transfer this file to another pc no error will be held(windows to linux or linux to windows).
+   
+   ##### settings.py:
+   
+       BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+       TEMPLATE_DIR = os.path.join(BASE_DIR,"templates"))
       
       
-                       
+                   
            
            
    
