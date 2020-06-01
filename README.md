@@ -125,7 +125,7 @@
             return "Title: {}, Author: {}, pages: {}".format(self.title,self.author,self.pages)
             
     b = book("python","jose",200)
-    print(b) # when we calling print function it's looking for string representation.we need to use what's known as a special method to do that.
+    print(b) # when we calling print function it's looking for string representation. we need to use what's known as a special method to do that.
 
     
      
