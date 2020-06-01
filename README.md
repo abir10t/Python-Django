@@ -105,7 +105,29 @@
      <img src="{% static "images/im.jpeg" %}" alt="Uh oh, didn't show!">
      </html>
     
-  ##### we can also handel css file from static folder.
+  ##### we need to handel css file from static folder.
+  
+  
+  
+  
+  
+  ### Creating Models:
+  
+   ##### Special Methods ( oop python ) :
+      class Book():
+
+      def__init__(self,title,author,pages):
+             self.title = title
+             self.author = author
+             self.pages = pages
+
+      def __str__(self): #that's the speacial method.
+            return "Title: {}, Author: {}, pages: {}".format(self.title,self.author,self.pages)
+            
+    b = book("python","jose",200)
+    print(b) # when we calling print function it's looking for string representation.we need to use what's known as a special method to do that.
+
+    
      
        
        
