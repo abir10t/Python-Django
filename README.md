@@ -42,16 +42,18 @@
    ##### urls.py :
           now create urls.py in apps folder
           
-          from django.conf.urls import url
-          from first import views
-          
-          urlpatterns=[
-          
-           url('',views.index,name='index'),
+         from django.urls import path
+         from first_app import views
+         urlpatterns=[
+         
+            path('',views.index,name='index'),
+       
+              ]
 
-           ]
            
    ##### views.py :
+          from django.shortcuts import render
+          from django.http import HttpResponse
           def index(request):
              return HttpResponse("hello world")
              
