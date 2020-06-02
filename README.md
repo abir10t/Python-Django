@@ -140,7 +140,7 @@
 
 
     class webpage(models.Model):
-        topic = models.ForeignKey(Topic,on_delete=models.CASCADE, ) ## When the referenced object is deleted, also delete the objects that have references to it,it's rule of Foreignkey.https://www.youtube.com/watch?v=uaRZy-rflRo
+        topic = models.ForeignKey(Topic,on_delete=models.CASCADE, ) # on_delete=models.CASCADE -> When the referenced object is deleted, also delete the objects that have references to it,it's rule of Foreignkey.https://www.youtube.com/watch?v=uaRZy-rflRo
         name = models.CharField(max_length=264,unique=True)
         url = models.URLField(unique=True)
 
