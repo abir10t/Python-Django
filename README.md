@@ -131,8 +131,7 @@
     
     
   ##### models.py :
-      from django.db import models
-      
+    from django.db import models
     class Topic(models.Model): #inheret from Model class
          top_name = models.CharField(max_length=264,unique=True)
 
@@ -141,7 +140,7 @@
 
 
     class webpage(models.Model):
-        topic = models.ForeignKey(Topic)
+        topic = models.ForeignKey(Topic,on_delete=models.CASCADE, )
         name = models.CharField(max_length=264,unique=True)
         url = models.URLField(unique=True)
 
@@ -150,11 +149,12 @@
 
 
     class AccessRecord(models.Model):
-         name = models.ForeignKey(webpage)
+         name = models.ForeignKey(webpage,on_delete=models.CASCADE, )
          date = models.DateField()
 
          def __str__(self):
-             return str(self.date) # this is a date time object so it's need be cast to string. if we unsure somewhere we can use str for typecasting
+             return str(self.date) # this is a date time object so it's need be cast to string. if we unsure somewhere we can use str for typecasting.
+
 
 
 ##### now, initiate this entire process into the project folder :
