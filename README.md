@@ -184,6 +184,20 @@
     
  ##### Super user :
         terminal -> python manage.py createsuperuser
+        
+        
+        
+        
+        
+        
+        
+ ### Population Scripts :
+     
+      1. terminal -> pip install Faker
+      2. create a new file in top level project folder ( populate_first_app.py -> name user define)
+      3. 
+      
+
 
     
 
