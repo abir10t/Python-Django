@@ -157,9 +157,39 @@
 
 
 
-##### now, initiate this entire process into the project folder :
+##### now, initiate this entire process into the project folder by migrate :
+       terminal  ->  python manage.py migrate
+ 
+
+##### registered the changes to our application
+    terminal -> python manage.py makemigrations first_app
+    terminal -> python manage.py migrate
+    
+    
+##### confirmed all of this are working by shell :
+         terminal -> python manage.py shell
+         from first_app.models import Topic
+         print(Topic.objects.all())
+         t = Topic(top_name="Social Network")
+         t.save()
+         print(Topic.objects.all())
+         
+         
+ #### admin interface with the models -> admin.py :
+    from django.contrib import admin
+    from first_app.models import AccessRecord, Topic,webpage
+    admin.site.register(AccessRecord)
+    admin.site.register(Topic)
+    admin.site.register(webpage)
+    
+ ##### Super user :
+        terminal -> python manage.py createsuperuser
+
+    
 
 
+
+     
       
 
     
