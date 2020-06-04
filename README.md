@@ -195,7 +195,57 @@
      
       1. terminal -> pip install Faker
       2. create a new file in top level project folder ( populate_first_app.py -> name user define)
-      3. 
+      3. ##### populate_first_app.py :
+      
+        import os
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE','first_project.settings') # configuring the settings for the project
+
+        import django
+        django.setup()
+
+
+        ## FAKE POP SCRIPT
+        import random
+        from first_app.models import AccessRecord,webpage,Topic
+        from faker import Faker
+
+
+        fakegen = Faker() #create a instance of Faker object
+        topics = ['Search','Social','Marketplace','News','Games']
+
+        def add_topic():
+             t = Topic.objects.get_or_create(top_name=random.choice(topics))[0]
+             #get_or_create() -> Returns a tuple of (object, created), where object is the retrieved or created object and
+             # created is a boolean specifying whether a new object was created.
+             #[0] -> Any keyword arguments passed to get_or_create() — except an optional one called defaults — will be used in a get() call.
+             #If an object is found, get_or_create() returns a tuple of that object and False.
+             t.save()
+             return t
+
+
+        def populate(N=5):
+           for entry in range(N):
+               top = add_topic()
+
+               #create the fake data for the entry
+               fake_url = fakegen.url()
+               fake_date =fakegen.date()
+               fake_name = fakegen.company()
+
+               # create the new  webpage entry
+               webpg = webpage.objects.get_or_create(topic=top,url=fake_url,name=fake_name)[0]
+
+               # create a fake accessrecord for that webpage
+
+               acc_rec = AccessRecord.objects.get_or_create(name=webpg,date=fake_date)[0]
+
+
+
+        if __name__ == '__main__':
+            print('populating script')
+            populate(20)
+            print("populating complete")
+
       
 
 
