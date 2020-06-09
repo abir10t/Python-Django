@@ -67,7 +67,13 @@
    ##### settings.py:
    
        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-       TEMPLATE_DIR = os.path.join(BASE_DIR,"templates"))
+       TEMPLATE_DIR = os.path.join(BASE_DIR,"templates")
+       
+       TEMPLATES = [
+      
+        'DIRS': [ TEMPLATE_DIR,],
+      
+       ]
        
   
   
@@ -245,6 +251,91 @@
             print('populating script')
             populate(20)
             print("populating complete")
+            
+            
+            
+            
+            
+ ### Models - Templates - views :
+      
+   ##### models.py:
+    
+    from django.db import models
+    class Topic(models.Model): #inheret from Model class
+             top_name = models.CharField(max_length=264,unique=True)
+
+             def __str__(self):
+                 return self.top_name
+
+
+    class webpage(models.Model):
+            topic = models.ForeignKey(Topic,on_delete=models.CASCADE, )# When the referenced object is deleted, also delete the objects that have references to it,
+
+            name = models.CharField(max_length=264,unique=True)
+            url = models.URLField(unique=True)
+
+            def __str__(self):
+                return self.name
+
+
+    class AccessRecord(models.Model):
+             name = models.ForeignKey(webpage,on_delete=models.CASCADE, )
+             date = models.DateField()
+
+             def __str__(self):
+                 return str(self.date) # this is a date time object so it's need be cast to string. if we unsure somewhere we can use str for typecasting.
+                 
+                 
+                 
+   #####  views.py :
+    
+        from first_app.models import Topic,webpage,AccessRecord
+        def index(request):
+          webpage_list = AccessRecord.objects.order_by('date')
+          date_dict = {'access_records':webpage_list}
+          return render(request,'first_app/index.html',context=date_dict)
+          
+          
+          
+   ##### index.html
+         
+    <!DOCTYPE html>
+    {% load staticfiles %}
+    <html >
+      <head>
+        <meta charset="utf-8">
+        <title>Django level 2</title>
+        <link rel="stylesheet" href="{% static "css/mystyle.css" %}"/>
+      </head>
+      <body>
+            <h1> wlcome to </h1>
+            <h2>here are your access records:</h2>
+             <div class="djangtwo">
+              {% if access_records %}
+               <table>
+                 <thead>
+                  <th>site name</th>
+                  <th>date access</th>
+                 </thead>
+                 {% for acc in access_records %}
+                 <tr>
+                   <td>{{ acc.name }}</td>
+                   <td>{{ acc.date }}</td>
+                 </tr>
+                 {% endfor %}
+               </table>
+              {% else %}
+                 <p>not found </p>
+              {% endif  %}
+            </div>
+    </html>
+
+                
+         
+
+        
+    
+        
 
       
 
