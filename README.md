@@ -378,7 +378,53 @@
     </html>
 
 
+ ### form validation :
+   #### custom valitadors :
+   #####  forms.py:
     
+      from django import forms
+    
+
+    class FormName(forms.Form):
+        name = forms.CharField()
+        email = forms.EmailField()
+        text = forms.CharField(widget=forms.Textarea)
+        botcatcher = forms.CharField(required=False,widget=forms.HiddenInput,validators=[validators.MaxLengthValidator(0)])
+        
+        
+  #### django provieds validator :
+  ##### forms.py : 
+    from django.core import validators
+    class FormName(forms.Form):
+      name = forms.CharField()
+      email = forms.EmailField()
+      text = forms.CharField(widget=forms.Textarea)
+      botcatcher = forms.CharField(required=False,widget=forms.HiddenInput,validators=[validators.MaxLengthValidator(0)])
+      
+    
+   #### custom clean method for our particular class method :
+   #### forms.py:
+     from django import forms
+     from django.core import validators
+
+
+    def check_for_z(value):
+        if value[0].lower() !='z':
+            raise forms.ValidationError("name needs to start with z")
+
+    class FormName(forms.Form):
+        name = forms.CharField(validators=[check_for_z])
+        email = forms.EmailField()
+        text = forms.CharField(widget=forms.Textarea)
+        botcatcher = forms.CharField(required=False,widget=forms.HiddenInput,validators=[validators.MaxLengthValidator(0)])
+        
+        
+   #### one method that clean the all field :
+   ##### forms.py :
+     
+
+
+     
         
     
         
