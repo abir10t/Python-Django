@@ -441,7 +441,95 @@
      
 
 
-     
+  ### create model form and save them into database :
+   #### models.py :
+   
+     from django.db import models
+     class UserF(models.Model):
+        first_name = models.CharField(max_length=128)
+        last_name = models.CharField(max_length=128)
+        email = models.EmailField(max_length=265, unique=True)
+        
+   #### admin.py :
+    from django.contrib import admin
+    from first_app.models import UserF
+    admin.site.register(UserF)
+    
+   #### forms.py :
+         from django import forms
+         from first_app.models import UserF
+
+    class NewUserForm(forms.ModelForm): #here we actually want to connect with model  so we use forms.ModelForm
+             class Meta():
+                 model = UserF
+                 fields ='__all__'
+                 
+   #### views.py :
+   
+    from django.shortcuts import render
+    from first_app.forms import NewUserForm
+
+    def index(request):
+        return render(request,'basicapp/index.html' )
+
+    def users(request):
+        form = NewUserForm()
+        
+        if request.method == "POST":
+            form =NewUserForm(request.POST)
+
+            if form.is_valid():
+                form.save(commit=True)
+                return index(request)
+            else :
+                print("form invalid")
+        return render(request,'basicapp/users.html',{'form':form})
+        
+        
+   #### idex.html :
+     <!DOCTYPE html>
+      <html >
+        <head>
+          <meta charset="utf-8">
+          <title>Home</title>
+        </head>
+        <body>
+          <h1>welcome</h1>
+          <h2>go to /users to sign up!</h2>
+        </body>
+      </html>
+      
+   #### users.html :
+    <!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title>Forms</title>
+
+      </head>
+      <body>
+
+    <h1>please sign up here !</h1>
+    <form method="post">
+    
+      {{ form.as_p }}
+      {% csrf_token %}
+      <input type="submit" class='btn btn-primary' value="Submit">
+      
+    </body>
+     </html>
+
+
+
+
+
+
+
+
+
+
+
+    
         
     
         
