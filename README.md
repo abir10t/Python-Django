@@ -550,6 +550,7 @@
       <body>
           <h1>welcome to RELATIVEU</h1>
           <a href="{% url 'basicapp:other' %}">The other page</a>
+           <a href="{% url 'admin:index' %}">Link to admin</a>  <!-- for admin link -->
       </body>
     </html>
     
