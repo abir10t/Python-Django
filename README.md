@@ -522,7 +522,52 @@
 
 
 
-### inheritance templates or RE
+### Relative urls :
+  #### urls.py : 
+       app_name = 'basicapp'
+
+       urlpatterns=[
+
+           path('relative/',views.relative,name='relative'),
+           path('other/',views.other,name='other'),
+     ]
+     
+  #### views.py :
+    def other(request):
+    return render(request,'basicapp/other.html')
+
+    def relative(request):
+        return render(request,'basicapp/relative_url_templates.html')
+        
+        
+ #### relative_url_templates.html :
+      <!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title></title>
+      </head>
+      <body>
+          <h1>welcome to RELATIVEU</h1>
+          <a href="{% url 'basicapp:other' %}">The other page</a>
+      </body>
+    </html>
+    
+    
+ #### other.html :
+     <!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <head>
+        <meta charset="utf-8">
+        <title></title>
+      </head>
+      <body>
+      <h1>welcome to other</h1>
+      </body>
+    </html>
+
+
+
 
 
 
