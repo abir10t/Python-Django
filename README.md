@@ -569,6 +569,45 @@
 
 
 
+### making passwords hasher :
+
+     pip install bcrypt
+     pip install django argon[2]
+
+ #### settings.py :
+ ##### create media & static folder in root :
+ 
+    STATIC_DIR = os.path.join(BASE_DIR,'static')
+    MEDIA_DIR = os.path.join(BASE_DIR,'media')
+    
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = [STATIC_DIR,]
+
+
+    MEDIA_ROOT = MEDIA_DIR
+    MEDIA_URL = '/media/'
+    
+    
+ ##### password hasing :
+ 
+        PASSWORD_HASHERS = [
+
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+
+
+    ]
+
+    AUTH_PASSWORD_VALIDATORS = [
+    
+    'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 9,
+        }
+    
+    ]
 
 
 
