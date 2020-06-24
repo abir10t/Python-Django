@@ -567,7 +567,18 @@
       </body>
     </html>
 
+ 
+ ### create media & static folder in root :
+ ##### settings.py :
+    STATIC_DIR = os.path.join(BASE_DIR,'static')
+    MEDIA_DIR = os.path.join(BASE_DIR,'media')
+    
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = [STATIC_DIR,]
 
+
+    MEDIA_ROOT = MEDIA_DIR
+    MEDIA_URL = '/media/'
 
 ### making passwords hasher :
 
