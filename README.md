@@ -439,7 +439,7 @@
             if email != vmail :
                  raise forms.ValidationError("Make sure email match")
      
-
+...................
 
   ### create model form and save them into database :
    #### models.py :
@@ -608,7 +608,57 @@
         }
     
     ]
+    
 
+#### User Models & Forms :
+##### models.py :
+
+    from django.db import models
+    from django.contrib.auth.models import User #for importing basic user model
+
+
+    class UserProfileInfo(models.Model):
+        user = models.OneToOneField(User,on_delete=models.CASCADE,)# this is basically a model class to add aditional information that the default User dosen't have. Remember default user already have things like username, email , pass. but if u want to add more attribute to your actual User you can essentially almost like extending the class of this one to one relationship. we don't want to do is just directly inherit from the User class, that may seem really tempting but doing that may screw up our database in thinking that it has multiple instances of same user.
+
+        portfolio_site = models.URLField(blank=True)
+
+        portfolio_pic = models.ImageField(upload_to='portfolio_pic',blank=True)
+
+        def __str__(self):
+            return self.user.username
+            
+            
+##### forms.py :
+    from django import forms
+    from django.contrib.auth.models import User
+    from first_app.models import UserProfileInfo
+
+    class UserForm(forms.ModelForm):
+        password = forms.CharField(widget=forms.PasswordInput())
+
+        class Meta():
+            model = User
+            fields = ('username','email','password')
+
+    class UserProfileInfo(forms.ModelForm):
+        class Meta():
+            model = UserProfileInfo
+            fields =('portfolio_site','portfolio_pic')
+            
+            
+            
+            
+ ##### admin.py :
+    from django.contrib import admin
+    from first_app.models import UserProfileInfo
+    admin.site.register(UserProfileInfo)
+
+    python manage.py migrate
+    python manage.py makemigrations first_app
+    python manage.py migrate
+
+
+    
 
 
 
