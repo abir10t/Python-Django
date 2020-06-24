@@ -640,7 +640,7 @@
             model = User
             fields = ('username','email','password')
 
-    class UserProfileInfo(forms.ModelForm):
+    class UserProfileInfoForm(forms.ModelForm):
         class Meta():
             model = UserProfileInfo
             fields =('portfolio_site','portfolio_pic')
