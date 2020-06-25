@@ -568,7 +568,7 @@
     </html>
 
  
- ### create media & static folder in root :
+ ### create media & static folder, templates/basuc_app in root :
  ##### settings.py :
     STATIC_DIR = os.path.join(BASE_DIR,'static')
     MEDIA_DIR = os.path.join(BASE_DIR,'media')
